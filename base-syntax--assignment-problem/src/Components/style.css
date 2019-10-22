@@ -1,0 +1,17 @@
+.useroutput{
+    text-align: left;
+    padding: 16px;
+    margin: 8px auto;
+    border: 2px solid black;
+    box-shadow: -3px 3px 3px 2px black;
+    width: 60%;
+    padding: 16px;
+    background: maroon;
+    color: white;
+}
+
+.username{
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+}

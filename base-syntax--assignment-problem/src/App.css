@@ -1,0 +1,7 @@
+.App {
+  margin: 16px;
+}
+
+input:focus {
+  outline: 2px solid #E25357
+}
