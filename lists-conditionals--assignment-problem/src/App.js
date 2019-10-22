@@ -4,44 +4,44 @@ import './App.css';
 import ValidationComponent from'./ValidationComponent/ValidationComponent'
 import CharComponent from './CharComponent/CharComponent'
 
+/* 
+*  Updated solution after seeing instructor code:
+*       o Removed charList state and just left it as a variable
+*       o Really no need for the length state...
+*       o .join method and updating state text makes sense, but I wouldn't have thought of that
+*     
+*/
+
 class App extends Component {
   state = {
     text: "",
-    textLength: 0,
-    charList: []
+    textLength: 0
   }
 
   changeTextHandler = (event) => {
     let newText = event.target.value;
     let len = newText.length;
-    let charArray = newText.split("");
 
     this.setState({
       text: newText,
-      textLength: len,
-      charList: charArray
+      textLength: len
     });
   }
 
   deleteCharHandler = (characterIndex) => {
-    const characters = [...this.state.charList];
+    const characters = this.state.text.split('');
     characters.splice(characterIndex, 1);
-    this.setState({charList: characters});
+    const updatedText = characters.join('');
+    this.setState({text: updatedText});
   }
 
   render() {
-      let charcomps = null;
-
-      charcomps = (
-        <div>
-          {this.state.charList.map( (character, index) => {
+      let charList = this.state.text.split('').map( (character, index) => {
             return <CharComponent 
               click={() => this.deleteCharHandler(index)} 
               key={index}
               character={character} /> 
-          })}
-        </div>
-      );
+          });
       
     return (
       <div className="App">
@@ -56,13 +56,12 @@ class App extends Component {
         </ol>
         <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
 
-        <input type="text" onChange={this.changeTextHandler} />
+        <input type="text" onChange={this.changeTextHandler} value={this.state.text}/>
         <p>{this.state.text}</p>
         <p>Length: {this.state.textLength}</p>
       
         <ValidationComponent len={this.state.textLength} />
-        {charcomps}
-        <p>{this.state.charList}</p>
+        {charList}
         
       </div>
     );
